@@ -6,7 +6,7 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:53:12 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/22 15:14:18 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 16:44:09 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,23 @@ typedef struct	s_functions
 					, struct s_functions *fct_table);
 }				t_functions;
 
+typedef struct	s_parsing
+{
+	size_t		arg_idx;
+	t_options	opt;
+	t_functions	fct_table;
+	int			algo_choosen;
+}				t_parsing;
+
 /*
 **	OPTIONS
 */
 int				no_options(t_options opt);
 int				get_opt(int ac, char **av, int algo_choosen);
 int				parse_opt(char *str, t_options *opt);
+int				launch_opt_p(t_parsing *parsing);
+int				launch_arg(char **av, t_parsing *parsing);
+int				launch_no_opt(char **av, int status, t_parsing *parsing);
 
 /*
 **	COMMON

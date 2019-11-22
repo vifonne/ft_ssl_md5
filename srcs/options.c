@@ -6,12 +6,11 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:02:09 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/22 15:24:04 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 16:44:22 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl_md5.h"
-#include <stdio.h>
 
 int		no_options(t_options opt)
 {
@@ -68,68 +67,29 @@ int		parse_opt(char *str, t_options *opt)
 	return (0);
 }
 
-int		launch_arg(char *av, int algo_choosen, t_options *opt
-		, t_functions fct_table)
-{
-	int	status;
-	int	s_tmp;
-
-	status = parse_opt(av, opt);
-	if (status == -1)
-	{
-		ft_error(NULL, -3);
-		return (-1);
-	}
-	if (opt->p == 1)
-	{
-		s_tmp = opt->s;
-		opt->s = 0;
-		if (!fct_table.hash_main(NULL, &fct_table, *opt, algo_choosen))
-			return (0);
-		opt->p = 0;
-		opt->s = s_tmp;
-	}
-	if (status > 0)
-	{
-		if (!fct_table.hash_main(av + status + 1, &fct_table, *opt
-					, algo_choosen))
-			return (0);
-		opt->s = 0;
-	}
-	return (1);
-}
-
 int		get_opt(int ac, char **av, int algo_choosen)
 {
-	size_t		arg_idx;
-	t_options	opt;
-	t_functions	fct_table;
 	int			file_trigger;
 	int			status;
+	t_parsing	parsing;
 
-	arg_idx = 1;
+	parsing.arg_idx = 1;
 	file_trigger = 0;
-	opt = (t_options){0, 0, 0, 0};
-	fct_table = set_fct_table(algo_choosen);
-	if (av[arg_idx] == NULL)
-		fct_table.hash_main(NULL, &fct_table, opt, algo_choosen);
-	while (arg_idx < (size_t)ac)
+	parsing.opt = (t_options){0, 0, 0, 0};
+	parsing.fct_table = set_fct_table(algo_choosen);
+	parsing.algo_choosen = algo_choosen;
+	if (av[parsing.arg_idx] == NULL)
 	{
-		if (av[arg_idx][0] == '-' && file_trigger == 0)
-		{
-			status = launch_arg(av[arg_idx] + 1, algo_choosen, &opt, fct_table);
-			if (av[arg_idx + 1] == NULL && status != -1)
-				fct_table.hash_main(NULL, &fct_table, opt, algo_choosen);
-		}
+		parsing.fct_table.hash_main(NULL, &parsing.fct_table, parsing.opt
+			, parsing.algo_choosen);
+	}
+	while (parsing.arg_idx < (size_t)ac)
+	{
+		if (av[parsing.arg_idx][0] == '-' && file_trigger == 0)
+			status = launch_arg(av, &parsing);
 		else
-		{
-			file_trigger = 1;
-			if (status != -1)
-				fct_table.hash_main(av[arg_idx], &fct_table, opt, algo_choosen);
-			opt.p = 0;
-			opt.s = 0;
-		}
-		arg_idx++;
+			file_trigger = launch_no_opt(av, status, &parsing);
+		parsing.arg_idx++;
 	}
 	return (1);
 }

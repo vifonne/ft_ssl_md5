@@ -6,7 +6,7 @@
 #    By: vifonne <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 10:20:14 by vifonne           #+#    #+#              #
-#    Updated: 2019/11/15 16:36:18 by vifonne          ###   ########.fr        #
+#    Updated: 2019/11/22 16:44:39 by vifonne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC			=	main.c				\
 				commons_utils.c		\
 				bytes.c				\
 				options.c			\
+				options_launchers.c	\
 				utils.c
 OBJ_DIR		=	.obj
 OBJ			=	$(SRC:.c=.o)
