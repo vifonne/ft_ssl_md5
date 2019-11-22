@@ -6,7 +6,7 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 11:35:08 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/22 15:06:53 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 16:22:11 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	read_from_fd(int fd, t_msg *msg, t_functions *fct_table, t_options opt)
 		msg->original_len += ret;
 		fct_table->string((uint8_t *)read_buffer, ret, msg, fct_table);
 	}
-	//if (opt.p == 1)
-	//	ft_putchar('\n');
 	fct_table->preparation(msg, fct_table);
 }
 
