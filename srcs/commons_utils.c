@@ -6,11 +6,12 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:15:59 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/15 15:56:11 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 12:25:39 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl_md5.h"
+#include <stdio.h>
 
 void	init_md_buffer(t_msg *msg)
 {

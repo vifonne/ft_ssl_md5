@@ -79,6 +79,6 @@ function generate_huge_file {
 	rm -f $path
 }
 
-#test_simple_letter "md5" "md5 -q txt"
-#test_random_text "md5" "md5 -q txt"
-generate_huge_file "sha256" "shasum -a 256 " "vifonne"
+test_simple_letter "md5" "md5 -q txt"
+test_random_text "md5" "md5 -q txt"
+#generate_huge_file "sha256" "shasum -a 256 " "vifonne"

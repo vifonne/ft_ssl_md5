@@ -6,12 +6,11 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:48:45 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/15 15:11:13 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 11:45:07 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl_md5.h"
-#include <stdio.h>
 
 t_functions	set_fct_table(int algo_choosen)
 {

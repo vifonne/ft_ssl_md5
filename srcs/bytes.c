@@ -6,12 +6,11 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 14:38:44 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/15 15:19:13 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 11:42:13 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl_md5.h"
-#include <stdio.h>
 
 uint32_t	bswap_32(uint32_t bytes)
 {
@@ -33,12 +32,17 @@ uint64_t	bswap_64(uint64_t bytes)
 	return (bytes);
 }
 
-void		print_byte(t_msg *msg)
+void		byte_to_hexa(char *dst, uint8_t byte)
 {
-	uint8_t		to_print[32];
-	uint32_t	tmp;
+	dst[0] = "0123456789abcdef"[byte >> 4];
+	dst[1] = "0123456789abcdef"[byte & 0xf];
+}
+
+int			prepare_bytes(uint8_t *dst, t_msg *msg)
+{
 	int			idx;
 	int			size;
+	uint32_t	tmp;
 
 	idx = 0;
 	size = 16;
@@ -48,17 +52,30 @@ void		print_byte(t_msg *msg)
 		while (idx < 8)
 		{
 			tmp = bswap_32(msg->md_buffer.h[idx]);
-			ft_memcpy(to_print + idx * sizeof(uint32_t), &tmp, sizeof(uint32_t));
+			ft_memcpy(dst + idx * sizeof(uint32_t)
+					, &tmp, sizeof(uint32_t));
 			idx++;
 		}
 		idx = 0;
 	}
 	else
-		ft_memcpy(to_print, msg->md_buffer.h, size);
+		ft_memcpy(dst, msg->md_buffer.h, size);
+	return (size);
+}
+
+void		print_byte(t_msg *msg)
+{
+	uint8_t		to_print[32];
+	char		dst[2];
+	int			idx;
+	int			size;
+
+	idx = 0;
+	size = prepare_bytes(to_print, msg);
 	while (idx < size)
 	{
-		printf("%02x", to_print[idx]);
+		byte_to_hexa(dst, to_print[idx]);
+		write(1, dst, 2);
 		idx++;
 	}
-	fflush(stdout);
 }
