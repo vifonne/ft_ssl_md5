@@ -6,7 +6,7 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:53:12 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/22 11:44:08 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 15:14:18 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ t_functions		set_fct_table(int algo_choosen);
 uint32_t		bswap_32(uint32_t bytes);
 uint64_t		bswap_64(uint64_t bytes);
 void			print_output(t_msg *msg, t_options opt);
-void			ft_error(int error_code);
+void			ft_error(char *str, int error_code);
 void			print_bits(uint8_t *msg, size_t length);
 void			print_byte(t_msg *msg);
 void			print_byte_256(t_msg *msg);

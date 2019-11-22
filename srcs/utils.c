@@ -6,7 +6,7 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:48:45 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/22 11:45:07 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 14:55:22 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_functions	set_fct_table(int algo_choosen)
 	return (fct_table);
 }
 
-void		print_output_full(t_msg *msg, int s, int r)
+void		print_output_full(t_msg *msg, int s, int r, int p)
 {
-	if (r == 0)
+	if (r == 0 && p != 1)
 	{
 		ft_putstr(msg->algo_name);
 		ft_putstr(" (");
@@ -50,7 +50,7 @@ void		print_output_full(t_msg *msg, int s, int r)
 		ft_putstr(") = ");
 	}
 	print_byte(msg);
-	if (r == 1)
+	if (r == 1 && p != 1)
 	{
 		ft_putchar(' ');
 		if (s == 1)
@@ -66,6 +66,6 @@ void		print_output(t_msg *msg, t_options opt)
 	if (opt.q == 1)
 		print_byte(msg);
 	else
-		print_output_full(msg, opt.s, opt.r);
+		print_output_full(msg, opt.s, opt.r, opt.p);
 	ft_putchar('\n');
 }

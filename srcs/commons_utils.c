@@ -6,12 +6,11 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:15:59 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/22 12:25:39 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 15:07:19 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl_md5.h"
-#include <stdio.h>
 
 void	init_md_buffer(t_msg *msg)
 {
@@ -80,6 +79,7 @@ int		launch_file_stdin(t_msg *msg, char *str, t_functions *fct_table
 		if (fd < 0)
 		{
 			free(msg);
+			ft_error(str, -2);
 			return (0);
 		}
 	}

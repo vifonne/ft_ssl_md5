@@ -6,7 +6,7 @@
 /*   By: vifonne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:17:48 by vifonne           #+#    #+#             */
-/*   Updated: 2019/11/15 15:09:32 by vifonne          ###   ########.fr       */
+/*   Updated: 2019/11/22 15:08:12 by vifonne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int		main(int ac, char **av)
 	{
 		algo_choosen = algo_finder(av[1]);
 		if (algo_choosen == -1)
-			ft_error(-1);
+			ft_error(NULL, -3);
 		else
-			get_opt(ac - 1, av + 1, algo_choosen);
+			if (!get_opt(ac - 1, av + 1, algo_choosen))
+				ft_error(NULL, -4);
 	}
 	return (0);
 }
